@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>အာယုစန်း ပေါင်းစပ်တွက်စက်</title>
+    <style>
+        /* refined color palette – မြန်မာ့ရိုးရာအဆင်းအရောင် */
+        :root {
+            --deep-maroon: #5e2a2c;        /* ကြွယ်ဝတဲ့ အနီညို */
+            --aged-gold: #b78c5a;           /* ရွှေရင့်ရောင် */
+            --soft-cream: #fefcf7;           /* နူးညံ့သော နို့နှစ်ရောင် */
+            --parchment: #f8f5f0;            /* ပေါဟောင်း အညိုဖျော့ */
+            --charcoal: #2c3e50;              /* မီးခိုးပြာရင့် */
+            --sand: #d9c8b2;                   /* သဲရောင် */
+        }
+
+        body {
+            font-family: 'Pyidaungsu', 'Myanmar3', 'Noto Sans Myanmar', sans-serif;
+            background: linear-gradient(145deg, #3e2c2c, #7a4f3e, #a6755a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            color: #2e241f;
+        }
+
+        .container {
+            background: var(--soft-cream);
+            padding: 30px 25px;
+            border-radius: 28px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35), 0 4px 12px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 460px;
+            border: 1px solid rgba(183, 140, 90, 0.15);
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--deep-maroon);
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 30%;
+            width: 40%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--aged-gold), transparent);
+        }
+
+        .section-title {
+            font-weight: 600;
+            color: var(--deep-maroon);
+            margin: 24px 0 12px;
+            border-left: 5px solid var(--aged-gold);
+            padding-left: 14px;
+            background: linear-gradient(to right, rgba(183,140,90,0.05), transparent);
+            font-size: 1.05rem;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            color: var(--charcoal);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--sand);
+            border-radius: 18px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            background-color: var(--parchment);
+            transition: 0.2s;
+            font-family: inherit;
+            color: #2e241f;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--aged-gold);
+            box-shadow: 0 0 0 3px rgba(183, 140, 90, 0.25);
+            background-color: #fffefc;
+        }
+
+        .row { display: flex; gap: 12px; }
+        .col-2 { flex: 2; }
+        .col-1 { flex: 1; }
+
+        button {
+            width: 100%;
+            padding: 16px 20px;
+            background: var(--charcoal);
+            color: white;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            box-shadow: 0 6px 0 #1a2a3a;
+            transition: 0.15s;
+            font-family: inherit;
+        }
+        button:hover {
+            background: #1f2e3d;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 #1a2a3a;
+        }
+        button:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #1a2a3a;
+        }
+
+        #result {
+            margin-top: 30px;
+            padding: 20px 15px;
+            background: var(--parchment);
+            border: 2px solid var(--aged-gold);
+            border-radius: 28px;
+            display: none;
+            text-align: center;
+            box-shadow: inset 0 0 10px rgba(94,42,44,0.05);
+        }
+
+        .final-val {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--deep-maroon);
+            display: block;
+            margin: 10px 0 5px;
+            line-height: 1.2;
+            text-shadow: 1px 1px 0 rgba(183,140,90,0.2);
+        }
+
+        #resDetail {
+            color: #5a4a3e;
+            font-size: 1.1rem;
+            border-top: 1px dashed var(--sand);
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(255, 240, 220, 0.8);
+            margin-top: 25px;
+            font-style: italic;
+        }
+
+        #kozarInfo {
+            font-size: 0.9rem;
+            color: var(--deep-maroon);
+            background: rgba(183,140,90,0.1);
+            padding: 10px 14px;
+            border-radius: 40px;
+            border: 1px solid var(--aged-gold);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>အာယုစန်း တွက်စက်</h2>
+
+    <div class="section-title">၁။ ကောဇာပြည့်စန်း တွက်ချက်ရန်</div>
+    <div class="input-group">
+        <label>မြန်မာနှစ် (ME)</label>
+        <input type="number" id="meYear" value="1386" oninput="updateKozar()">
+    </div>
+    <div id="kozarInfo" style="font-size: 0.9rem; color: #5e2a2c; margin-bottom: 15px;">
+        ကောဇာ: - လုံး - ပါဒ်
+    </div>
+
+    <div class="section-title">၂။ မိမိစင်နက္ခတ် (မူလဇာတာ)</div>
+    <div class="input-group">
+        <label>နက္ခတ်အမည် ရွေးပါ</label>
+        <select id="sNak">
+            <!-- filled by js -->
+        </select>
+    </div>
+    <div class="input-group">
+        <label>မိမိကျရောက်သော ပါဒ်</label>
+        <select id="sPad">
+            <option value="1">၁ ပါဒ်</option>
+            <option value="2">၂ ပါဒ်</option>
+            <option value="3">၃ ပါဒ်</option>
+            <option value="4">၄ ပါဒ်</option>
+        </select>
+    </div>
+
+    <button onclick="calculateFinal()">အာယုစန်း တွက်ထုတ်မည်</button>
+
+    <div id="result">
+        <div style="font-weight: 600; color: var(--charcoal);">ရလဒ် အာယုစန်းနက္ခတ်</div>
+        <span id="resMain" class="final-val"></span>
+        <div id="resDetail" style="color: #5a4a3e;"></div>
+    </div>
+</div>
+
+<footer>© 2026 Zaw Aung Htut. All rights reserved.</footer>
+
+<script>
+    const nakshatras = [
+        "", "အဿဝဏီ", "ဘရဏီ", "ကြတ္တိကာ", "ရောဟဏီ", "မိဂသီ", "အဒြ", "ပုဏ္ဏဖုသျှု", "ဖုသျှ", "အသလိဿ", "မာဃ", 
+        "ပုဗ္ဗဖရဂုဏ္ဏီ", "ဥတ္တရာဖရဂုဏ္ဏီ", "ဟဿတ", "စိတြ", "သွာတိ", "ဝိသာခါ", "အနုရာဓ", "ဇေဌ", "မူလ", "ပုဗ္ဗသဠ်", 
+        "ဥတ္တရာသဠ်", "သရဝဏ်", "ဓနသိဒ္ဓိ", "သတ္တဘိသျှ", "ပုဗ္ဗဘဒြပိုဒ်", "ဥတ္တရာဘဒြပိုဒ်", "ရေဝတီ"
+    ];
+
+    // နက္ခတ်စာရင်းကို Dropdown ထဲထည့်ခြင်း
+    const select = document.getElementById('sNak');
+    for(let i=1; i<=27; i++) {
+        let opt = document.createElement('option');
+        opt.value = i;
+        opt.innerHTML = i + " - " + nakshatras[i];
+        select.appendChild(opt);
+    }
+
+    function updateKozar() {
+        const year = parseInt(document.getElementById('meYear').value);
+        if(!year) return;
+        let rem108 = year % 108;
+        let n = Math.floor(rem108 / 4);
+        let p = rem108 % 4;
+        document.getElementById('kozarInfo').innerHTML = `ကောဇာပြည့်စန်း: <b>${n} လုံး ${p} ပါဒ်</b>`;
+    }
+
+    function calculateFinal() {
+        const year = parseInt(document.getElementById('meYear').value);
+        const sNak = parseInt(document.getElementById('sNak').value);
+        const sPad = parseInt(document.getElementById('sPad').value);
+
+        // ၁။ ကောဇာတွက်ချက်ခြင်း
+        let rem108 = year % 108;
+        let kN = Math.floor(rem108 / 4);
+        let kP = rem108 % 4;
+
+        // ၂။ ပေါင်းခြင်း Logic (မူရင်းအတိုင်း)
+        let totalPad = kP + sPad;
+        let carryNak = 0;
+
+        if (totalPad > 4) {
+            carryNak = Math.floor(totalPad / 4);
+            totalPad = totalPad % 4;
+            if (totalPad === 0) totalPad = 4;
+        } 
+
+        let totalNak = kN + sNak + carryNak;
+
+        // ၃။ ၂၇ ကျော်လျှင် နှုတ်ခြင်း
+        while (totalNak > 27) {
+            totalNak -= 27;
+        }
+
+        // ပြသခြင်း
+        const resultDiv = document.getElementById('result');
+        resultDiv.style.display = 'block';
+        document.getElementById('resMain').innerText = `${totalNak} လုံး ${totalPad} ပါဒ်`;
+        document.getElementById('resDetail').innerText = `(${nakshatras[totalNak]} နက္ခတ်)`;
+    }
+
+    // Initial Load
+    updateKozar();
+</script>
+
+</body>
+</html>
